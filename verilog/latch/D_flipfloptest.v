@@ -13,7 +13,7 @@ module D_flipfloptest ;
   );
   
   initial begin 
-    data = 0;
+    data = 1;
     clk = 0;
     $dumpfile("wave.vcd");
     $dumpvars(0,D_flipfloptest);
@@ -23,10 +23,16 @@ module D_flipfloptest ;
   end
 
   initial begin
-      #60 data = 0;
-      #80 data = 1;
-      //#90 data = 0;
-      #120 $finish;
+    #10 data = 1;
+    #10 data = 1;
+    #10 data = 1;
+    #10 data = 1;
+    #10 data = 1;
+    #10 data = 1;
+    #10 data = 1;
+    #10 data = 1;
+    #10 data = 0;
+    #220 $finish;
     end 
   initial begin
     $monitor("time = ", $time, " data = %b q = %b _q = %b"

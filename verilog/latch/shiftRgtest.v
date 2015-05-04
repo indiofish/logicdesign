@@ -11,25 +11,30 @@ module shiftRgtest ;
   );
 
   initial begin 
-    Data = 1;
+    Data = 0;
     clk = 0;
     $dumpfile("wave.vcd");
     $dumpvars(0,shiftRgtest);
 
     forever begin
-      #10 clk = ~clk;
+      #5 clk = ~clk;
     end
   end
 
   initial begin
-      //#30 Data = 1;
-      //#30 data = 1;
-      //#90 data = 0;
-      #420 $finish;
+      #30 Data = 0;
+      #10 Data = 1;
+      #10 Data = 0;
+      #10 Data = 0;
+      #10 Data = 1;
+      #10 Data = 1;
+      #10 Data = 0;
+      #10 Data = 0;
+      #600 $finish;
     end 
   initial begin
-    $monitor("time = ", $time, "data is %b, output is %b"
-    ,Data, out);
+    $monitor("time = ", $time, " output is %b"
+    , out);
   end
   
   

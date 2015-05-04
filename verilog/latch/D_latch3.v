@@ -15,10 +15,10 @@ reg q;
 reg _q;
 
 //-------------Code Starts Here---------
-always @ ( en or data)
+always @ (en or data)
 if (en) begin
   q <= data;
-  _q <= !q;
+  _q <= !data;
 end
 
 endmodule //End Of Module dlatch_reset
