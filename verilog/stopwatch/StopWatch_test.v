@@ -20,12 +20,12 @@ initial begin
 end 
 
 initial begin
-  #9700
+  #6000
   begin
-    reset = 0;
-    start_resume = 1;
+    reset <= 0;
+    start_resume <= 1;
   end
-  #300000 $finish;
+  #30000 $finish;
 end 
 
 endmodule
