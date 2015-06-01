@@ -1,4 +1,5 @@
 `include "./SingleDigitWatch.v"
+`include "./SingleDigitWatch6.v"
 `include "./ClkDiv10.v"
 `include "./ClkDiv60.v"
 `include "./ClkDiv100.v"
@@ -13,14 +14,14 @@ wire min0,sec1,sec0,milSec0;
 //60-- everytime?
 wire min0clk, sec1clk, sec0clk;
 
+ClkDiv10 secone(sec0clk,clk);
+ClkDiv10 sectwo(sec1clk,sec0clk);
+ClkDiv60 minzero(min0clk,sec1clk);
 
 //devide the clk and put it as input.
 SingleDigitWatch MIL0(milSec0, start_resume,reset,stop,clk);
-ClkDiv10 secone(sec0clk,clk);
 SingleDigitWatch SEC0(sec0, start_resume,reset,stop,sec0clk);
-ClkDiv100 sectwo(sec1clk,clk);
-SingleDigitWatch SEC1(sec1, start_resume,reset,stop,sec1clk);
-ClkDiv60 minzero(min0clk,clk);
-SingleDigitWatch MIN0(min0, start_resume,reset,stop,min0clk);
+SingleDigitWatch6 SEC1(sec1, start_resume,reset,stop,sec1clk);
+SingleDigitWatch MIN0(min0,start_resume,reset,stop,min0clk);
 
 endmodule

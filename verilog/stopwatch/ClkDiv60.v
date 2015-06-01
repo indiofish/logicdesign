@@ -3,20 +3,20 @@ module ClkDiv60(
   input clk
 );
 
-integer div = 1200;
+integer div = 5;
 reg newclk = 0;
 
-always @(clk) 
+always @(posedge clk) 
 begin
   if (div != 0)
   begin
-    newclk = 0;
-    div = div - 1;
+    newclk <= 0;
+    div <= div - 1;
   end
   if (div == 0)
   begin
-    newclk = 1;
-    div = 1200;
+    div <= 5;
+    newclk <= 1;
   end
   end
 endmodule
