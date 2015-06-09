@@ -1,3 +1,14 @@
+##Modules
+  * stopwatch module 
+    as is.
+  * watch module 
+    as is.
+  * alarm module 
+    as is.
+   
+   Mode switch chooses which mode to "display"
+   while other modes are just running.
+
 ##extra implementation
 
   * 알람이 켜져있을 때, UPUP 표시/morse부호
@@ -10,3 +21,5 @@
   * 알람을 끄는 데 추가노력
   * 스네이크 게임????????????
   * 애인의 생일을 기억하는 기능
+
+

@@ -1,10 +1,9 @@
 module AlarmModule (
   output alarm,
-  input[3:0] curMin0, curMin1, curHour0, curHour1, //read time every 10's clk
+  input[3:0] curMin0, curMin1, curHour0, curHour1, //read time every n's clk
   input alarmSet, alarmReset, clk
 );
 reg alarm;
-//reg curMin0, curMin1, curHour0, curHour1;
 reg[3:0] savMin0, savMin1, savHour0, savHour1; //save alarm time
 
 always @(curMin0) //if curMin0 changes, everything changes

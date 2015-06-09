@@ -1,10 +1,11 @@
-module sevensegdecoder (
+module SevenSegDecoder(
   input[3:0] number,
   output A, B, C, D, E, F, G
 );
 
 reg A,B,C,D,E,F,G;
 
+//fix this to only combinational logic?
 always @(number)
 begin
   if  (number == 4'b0000)

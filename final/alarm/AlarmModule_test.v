@@ -1,4 +1,5 @@
 `include "./AlarmModule.v"
+//if we have to beep the alarm, synch it with clk
 module AlarmModule_test;
 wire alarm;
 reg[3:0] curMin0, curMin1, curHour0, curHour1;
@@ -53,9 +54,9 @@ initial begin
   begin
     curMin0=curMin0+1;
   end
-  #20
+  #50
   begin
-    curMin0=curMin0+1;
+    curMin0 = curMin0 + 1;
   end
   #200 $finish;
 end 
