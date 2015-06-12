@@ -1,6 +1,7 @@
+//TODO get input from SetTime
 module AlarmModule (
   output alarm,
-  input[3:0] curMin0, curMin1, curHour0, curHour1, //read time every n's clk
+  input[3:0] curHour1, curHour0, curMin1, curMin0, //read time every n's clk
   input alarmSet, alarmReset, clk
 );
 reg alarm;
@@ -43,5 +44,5 @@ begin
   end
 end
 
-  
+
 endmodule
