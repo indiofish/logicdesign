@@ -17,6 +17,10 @@ module WatchCtrl (
 );
 
 //VARIABLE DECLARTION
+//constants for mode
+parameter WATCH = 3'b000,
+  STOPWATCH = 3'b001
+  ;
 
 //For display
 reg [3:0] dis3, dis2, dis1, dis0; 
@@ -32,7 +36,7 @@ reg [3:0] Alm_hour1, Alm_hour0, Alm_min1, Alm_min0;
 //internal value of Day
 reg [3:0] Day_3, Day_2,Day_1,Day_0;
 
-//endof VARIABLE DECLARTIONS
+//ENDOF VARIABLE DECLARTIONS
 
 //MODOLE DECLATIONS
 
@@ -71,7 +75,7 @@ SevenSegDecoder fourth(
   dis0,d0[0],d0[1],d0[2],d0[3],d0[4],d0[5],d0[6]
 );
 
-//end of modole declations
+//END OF MODULE DECLATIONS
 
 //BEHAVIOR
 always @(posedge clk)
@@ -79,26 +83,21 @@ begin
   //setValue overrides display, changing curr mode's value
   if  (setValue == 1)
   begin
-    //Watch
-    if (mode == 3'b000)
+    if (mode == WATCH)
     begin
       dis3 <= St_hour1;
       dis2 <= St_hour0;
       dis1 <= St_min1;
       dis0 <= St_min0;
+      //after this, give input to clock
     end
-    //stopwatch
-    if (mode == 3'b001)
+    if (mode == STOPWATCH)
     begin
-      dis3 <= 0;
-      dis2 <= 0;
-      dis1 <= 0;
-      dis0 <= 0;
     end
   end
   
   //base mod: watch
-  else if (mode == 3'b000)
+  else if (mode == WATCH)
   begin
       dis3 <= W_hour1;
       dis2 <= W_hour0;
@@ -107,8 +106,12 @@ begin
   end
 
   //stopwatch
-  else if (mode == 3'b001) 
+  else if (mode == STOPWATCH) 
   begin
+      dis3 <= 3'b000;
+      dis2 <= 3'b000;
+      dis1 <= 3'b000;
+      dis0 <= 3'b000;
   end
   
 end

@@ -106,7 +106,7 @@ begin
     D = 1;
     E = 0;
     F = 1;
-    G = 0;
+    G = 1;
   end
 end 
 endmodule
