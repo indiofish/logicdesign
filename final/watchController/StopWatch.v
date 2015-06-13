@@ -1,13 +1,12 @@
-`include "./Counter/Mod6Counter.v"
-`include "./Counter/Mod10Counter.v"
+`include "Mod6Counter.v"
+`include "Mod10Counter.v"
 
 
 
 module StopWatch(
-  output[3:0] min0, sec1, sec0, milSec0,
+  output wire[3:0] min0, sec1, sec0, milSec0,
   input start_resume,reset, stop, clk
 );
-wire min0,sec1,sec0,milSec0;
 
 wire min0clk, sec1clk, sec0clk;
 

@@ -1,16 +1,16 @@
-`include "./Counter/Mod6Counter.v"
-`include "./Counter/Mod10Counter.v"
-`include "./Counter/Mod2Counter.v"//hour 1 digit
-`include "./Counter/Mod13Counter.v" //hour 0 digit
+`include "Mod6Counter.v"
+`include "Mod10Counter.v"
+`include "Mod2Counter.v"//hour 1 digit
+`include "Mod13Counter.v" //hour 0 digit
 
 //able to set time 
 module Watch (
-  output[3:0] hr1, hr0, min1, min0,
+  output wire[3:0] hr1, hr0, min1, min0,
   output daypass,
   input start_resume,reset, stop, clk, setTime
 );
 
-wire  hr1, hr0, min1, min0;
+
 wire min1clk, h0clk, h1clk;
 
 Mod10Counter Min0(min0,min1clk,start_resume,reset,stop,clk);

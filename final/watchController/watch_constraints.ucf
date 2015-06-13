@@ -1,0 +1,52 @@
+
+# PlanAhead Generated IO constraints 
+
+NET "d0[6]" IOSTANDARD = LVCMOS25;
+NET "d0[5]" IOSTANDARD = LVCMOS25;
+NET "d0[4]" IOSTANDARD = LVCMOS25;
+NET "d0[3]" IOSTANDARD = LVCMOS25;
+NET "d0[2]" IOSTANDARD = LVCMOS25;
+NET "d0[1]" IOSTANDARD = LVCMOS25;
+NET "d0[0]" IOSTANDARD = LVCMOS25;
+
+# PlanAhead Generated physical constraints 
+
+NET "d0[6]" LOC = P3;
+NET "d0[5]" LOC = P4;
+NET "d0[4]" LOC = P5;
+NET "d0[3]" LOC = P6;
+NET "d0[2]" LOC = P7;
+NET "d0[1]" LOC = P8;
+NET "d0[0]" LOC = P10;
+NET "d1[6]" LOC = P11;
+NET "d1[5]" LOC = P12;
+NET "d1[4]" LOC = P13;
+NET "d1[3]" LOC = P15;
+NET "d1[2]" LOC = P16;
+NET "d1[1]" LOC = P18;
+NET "d1[0]" LOC = P19;
+NET "d2[5]" LOC = P24;
+NET "d2[4]" LOC = P25;
+NET "d2[3]" LOC = P27;
+NET "d2[2]" LOC = P28;
+NET "d2[1]" LOC = P29;
+NET "d2[0]" LOC = P30;
+NET "d3[6]" LOC = P142;
+NET "d3[5]" LOC = P141;
+NET "d2[6]" LOC = P21;
+NET "alarmBeep" LOC = P127;
+NET "clk" LOC = P126;
+NET "nextd" LOC = P125;
+NET "resetTime" LOC = P124;
+NET "setValue" LOC = P54;
+NET "start_resume" LOC = P55;
+NET "stop" LOC = P57;
+NET "upTime" LOC = P58;
+NET "d3[4]" LOC = P139;
+NET "d3[3]" LOC = P138;
+NET "d3[2]" LOC = P135;
+NET "d3[1]" LOC = P134;
+NET "d3[0]" LOC = P132;
+NET "mode[2]" LOC = P131;
+NET "mode[1]" LOC = P130;
+NET "mode[0]" LOC = P129;

@@ -1,10 +1,8 @@
 module Day(
-  output [3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter,
+  output reg [3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter,
   input[2:0] curDay,
   input start_resume,resetTime,stop,clk,setValue
 );
-
-reg [3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter;
 
 reg clkcount=1'b0;
 reg [2:0]current, next;
@@ -95,10 +93,10 @@ always @(posedge clk)
 begin
   begin
     if  (resetTime == 1)
-      current = mon;
+      current <= mon;
     if (setValue == 1) 
     begin
-      current = curDay;
+      current <= curDay;
     end
 
     else if(clkcount==0)
@@ -108,7 +106,7 @@ begin
     end
     else
     begin
-      clkcount=clkcount - 1;
+      clkcount<=clkcount - 1;
       current<=current;
     end
   end

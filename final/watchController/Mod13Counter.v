@@ -5,14 +5,12 @@
 //first digit of hour display
 //should have 24/12 mode input?????
 module Mod13Counter(
-  output[3:0] number,
-  output cout,
+  output reg[3:0] number,
+  output reg cout,
   input start_resume,reset, stop, clk
 );
 
 reg [3:0] current, next;
-reg [3:0] number;
-reg cout;
 
 parameter zero =4'b0000,
   one=4'b0001,
@@ -42,25 +40,53 @@ begin
       cout = 0;
     end
     next=current + 1;
-    number=current%10;
+	if(current == ten)
+		number = zero;
+	else if(current == eleven)
+		number = one;
+	else if(current == twelve)
+		number = two;
+	else
+		number = current;
   end
   else if(start_resume==0)
   begin
     cout = 0;
     next=current;
-    number=current%10;
+    if(current == ten)
+		number = zero;
+	else if(current == eleven)
+		number = one;
+	else if(current == twelve)
+		number = two;
+	else
+		number = current;
   end
   else if(stop==1)
   begin
     cout = 0;
     next=current;
-    number=current%10;
+    if(current == ten)
+		number = zero;
+	else if(current == eleven)
+		number = one;
+	else if(current == twelve)
+		number = two;
+	else
+		number = current;
   end
   else if(reset==1) 
   begin
     cout = 0;
     next=zero;
-    number=current%10;
+    if(current == ten)
+		number = zero;
+	else if(current == eleven)
+		number = one;
+	else if(current == twelve)
+		number = two;
+	else
+		number = current;
   end
 
   //change this to for counter of different modulo
@@ -68,7 +94,14 @@ begin
   begin
     next = zero;
     cout = 0;
-    number = current%10;
+    if(current == ten)
+		number = zero;
+	else if(current == eleven)
+		number = one;
+	else if(current == twelve)
+		number = two;
+	else
+		number = current;
   end
 
 end

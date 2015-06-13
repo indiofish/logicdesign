@@ -1,12 +1,10 @@
 module SetDay(
-  output[3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter,
-  output [2:0] curDay,
+  output reg[3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter,
+  output reg[2:0] curDay,
   input start, reset, up
 );
 
-reg [3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter;
 reg [2:0]current;
-reg curDay;
 reg changeDay;
 
 parameter mon=3'b000,
@@ -101,7 +99,7 @@ begin
       ThirdLetter<=C_N;
       FourthLetter<=C_SPACE;
       curDay<=mon;
-      current=mon;
+      current<=mon;
     end
   end
 end

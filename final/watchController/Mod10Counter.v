@@ -1,14 +1,12 @@
 `ifndef MOD10_V
 `define MOD10_V
 module Mod10Counter(
-  output[3:0] number,
-  output cout,
+  output reg[3:0] number,
+  output reg cout,
   input start_resume,reset, stop, clk
 );
 
 reg [3:0] current, next;
-reg [3:0] number;
-reg cout;
 
 parameter zero =4'b0000,
   one=4'b0001,

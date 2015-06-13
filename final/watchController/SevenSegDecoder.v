@@ -1,10 +1,9 @@
 module SevenSegDecoder(
   input[3:0] value,
   input mode,
-  output A, B, C, D, E, F, G
+  output reg A, B, C, D, E, F, G
 );
 
-reg A,B,C,D,E,F,G;
 parameter NUMBER = 0,
 ALPHABET = 1,
 C_SPACE = 4'b0000,
@@ -128,6 +127,16 @@ begin
       F = 1;
       G = 1;
     end
+	else
+	begin
+	 A = 0;
+      B = 0;
+      C = 0;
+      D = 0;
+      E = 0;
+      F = 0;
+      G = 0;
+	end
   end
 
   else if (mode == ALPHABET)
@@ -271,5 +280,15 @@ begin
       F = 1;
       G = 0;
     end 
+	else
+	begin
+	 A = 0;
+      B = 0;
+      C = 0;
+      D = 0;
+      E = 0;
+      F = 0;
+      G = 0;
+	end
   end 
 endmodule

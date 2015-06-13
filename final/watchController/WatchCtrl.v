@@ -1,12 +1,12 @@
-`include "./StopWatch.v"
-`include "./AlarmModule.v"
-`include "./SevenSegDecoder.v"
-`include "./Watch.v"
-`include "./SetTime.v"
-`include "./SetDay.v"
-`include "./Day.v"
+`include "StopWatch.v"
+`include "AlarmModule.v"
+`include "SevenSegDecoder.v"
+`include "Watch.v"
+`include "SetTime.v"
+`include "SetDay.v"
+`include "Day.v"
 
-module WatchCtrl (
+module WatchCtrl ( 
   input[2:0] mode,
   input resetTime, setValue, upTime, nextd,
   input clk, start_resume, stop,
@@ -82,7 +82,7 @@ AlarmModule alm(
   setValue,resetTime,clk
 );
 //FIXME
-StopWatch stopwatch();
+//StopWatch stopwatch();
 
 Watch watch(
   W_hour1, W_hour0, W_min1, W_min0,daypass,
@@ -114,7 +114,7 @@ SevenSegDecoder fourth(
 
 //BEHAVIOR
 //FIXME if this chatters, only use clk
-always @(posedge clk or mode) 
+always @(posedge clk) 
 begin
   //setValue overrides display
   if  (setValue == 1)

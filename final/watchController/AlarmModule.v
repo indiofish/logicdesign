@@ -1,12 +1,11 @@
 //TODO get input from SetTime
 module AlarmModule (
-  output alarm,
-  output[3:0] disH1,disH0,disM1,disM0,
+  output reg alarm,
+  output reg[3:0] disH1,disH0,disM1,disM0,
   input[3:0] curHour1, curHour0, curMin1, curMin0, //read time every n's clk
   input alarmSet, alarmReset, clk
 );
-reg alarm;
-reg disH1,disH0,disM1,disM0;
+
 reg[3:0] savMin0, savMin1, savHour0, savHour1; //save alarm time
 
 //if curMin0 changes, everything changes
