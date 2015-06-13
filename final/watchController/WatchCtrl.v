@@ -3,7 +3,6 @@
 `include "./SevenSegDecoder.v"
 `include "./Watch.v"
 `include "./SetTime.v"
-//TODO append modules
 
 module WatchCtrl (
   input[2:0] mode,
@@ -17,9 +16,10 @@ module WatchCtrl (
 );
 
 //VARIABLE DECLARTION
-//constants for mode
+//TODO constants for mode
 parameter WATCH = 3'b000,
-  STOPWATCH = 3'b001
+  STOPWATCH = 3'b001,
+  ALARM = 3'b010
   ;
 
 //For display
@@ -35,10 +35,13 @@ reg [3:0] Sw_min, Sw_sec1, Sw_sec0, Sw_milSec;
 reg [3:0] Alm_hour1, Alm_hour0, Alm_min1, Alm_min0;
 //internal value of Day
 reg [3:0] Day_3, Day_2,Day_1,Day_0;
+//internal value for setbutton
+reg set;
 
 //ENDOF VARIABLE DECLARTIONS
 
-//MODOLE DECLATIONS
+//MODULE DECLATIONS
+//TODO append modules
 
 //input
 SetTime timeset(
@@ -46,10 +49,11 @@ SetTime timeset(
   setValue,resetTime,nextd,upTime
 );
 
-//internal module
+//ALarm module should always run
 AlarmModule alm(
   alarmBeep,
   //internal var
+  //displays saved time
   Alm_hour1, Alm_hour0, Alm_min1, Alm_min0,
   setValue,resetTime,clk
 );
@@ -78,7 +82,8 @@ SevenSegDecoder fourth(
 //END OF MODULE DECLATIONS
 
 //BEHAVIOR
-always @(posedge clk)
+//FIXME if this chatters, only use clk
+always @(posedge clk or mode) 
 begin
   //setValue overrides display, changing curr mode's value
   if  (setValue == 1)
@@ -91,18 +96,32 @@ begin
       dis0 <= St_min0;
       //after this, give input to clock
     end
-    if (mode == STOPWATCH)
+    if (mode == ALARM)
     begin
+      dis3 <= St_hour1;
+      dis2 <= St_hour0;
+      dis1 <= St_min1;
+      dis0 <= St_min0;
+      Alm_hour1 <= St_hour1; 
+      Alm_hour0 <= St_hour0; 
+      Alm_min1 <=St_min1; 
+      Alm_min0 <= St_min0;
     end
   end
   
   //base mod: watch
+  //FIXME fix this to switch case later
   else if (mode == WATCH)
   begin
       dis3 <= W_hour1;
       dis2 <= W_hour0;
       dis1 <= W_min1;
       dis0 <= W_min0;
+
+      Alm_hour1 <= W_hour1; 
+      Alm_hour0 <= W_hour0; 
+      Alm_min1 <=  W_min1; 
+      Alm_min0 <=  W_min0;
   end
 
   //stopwatch
@@ -112,8 +131,22 @@ begin
       dis2 <= 3'b000;
       dis1 <= 3'b000;
       dis0 <= 3'b000;
+
+      Alm_hour1 <= W_hour1; 
+      Alm_hour0 <= W_hour0; 
+      Alm_min1 <=  W_min1; 
+      Alm_min0 <=  W_min0;
   end
   
+  //ALARM
+  //FIXME displays saved time
+  else if (mode == ALARM) 
+  begin
+      dis3 <= W_hour1;
+      dis2 <= W_hour0;
+      dis1 <= W_min1;
+      dis0 <= W_min0;
+  end
 end
 //ENDOFBEHAVIOR
 

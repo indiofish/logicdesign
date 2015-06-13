@@ -38,9 +38,32 @@ initial begin
     resetTime <= 0;
     start_resume <= 1;
   end
-  #1000
+  #10 mode = 3'b010;
+  #10 setValue = 1;
+    #10 upTime = 1;
+    #10 upTime = 0;
+    #10 upTime = 1;
+    #10 upTime = 0;
+    #10 upTime = 1;
+    #10 upTime = 0;
+    #10 upTime = 1;
+    #10 upTime = 0;
+    #10 nextDigit = 1;
+    #10 nextDigit = 0;
+    #10 upTime = 1;
+    #10 upTime = 0;
+    #10 upTime = 1;
+    #10 upTime = 0;
+    #10 nextDigit = 1;
+    #10 nextDigit = 0;
+    #10 upTime = 1;
+    #10 upTime = 0;
+  #10 setValue = 0;
+    
   mode = 3'b001;
+  #200
+  mode = 3'b000;
 
-  #3000 $finish;
+  #1000 $finish;
 end 
 endmodule
