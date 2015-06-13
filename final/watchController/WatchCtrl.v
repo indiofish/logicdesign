@@ -12,7 +12,7 @@ module WatchCtrl (
   input clk, start_resume, stop,
   
   //output to sevensegdecoder
-  output[6:0] d3, d2, d1, d0,
+  output[6:0] d6, d5, d4, d3, d2, d1, d0,
   output alarmBeep
 );
 
@@ -24,7 +24,7 @@ parameter WATCH = 3'b000,
   DAY = 3'b011;
 
 //For display
-reg [3:0] dis3, dis2, dis1, dis0; 
+reg [3:0] dis6, dis5, dis4, dis3, dis2, dis1, dis0; 
 
 //internal value of SetTime
 wire [3:0] St_hour1, St_hour0, St_min1, St_min0;
@@ -32,7 +32,7 @@ wire [3:0] St_hour1, St_hour0, St_min1, St_min0;
 wire [3:0] Sd_c3, Sd_c2, Sd_c1, Sd_c0;
 wire[2:0] Sd_day;
 //internal value of Watch
-wire [3:0] W_hour1, W_hour0, W_min1, W_min0;
+wire [3:0] W_hour1, W_hour0, W_min1, W_min0, W_sec1, W_sec0;
 wire daypass;
 //internal value of stopwatch
 reg [3:0] Sw_min, Sw_sec1, Sw_sec0, Sw_milSec;
@@ -85,7 +85,8 @@ AlarmModule alm(
 //StopWatch stopwatch();
 
 Watch watch(
-  W_hour1, W_hour0, W_min1, W_min0,daypass,
+  W_hour1, W_hour0, W_min1, W_min0, W_sec1, W_sec0,
+  daypass,
   start_resume,resetTime,stop,clk,setValue
 );
 
@@ -94,18 +95,30 @@ Watch watch(
 
 //display
 SevenSegDecoder first(
+  dis6, numorchar,
+  d6[0],d6[1],d6[2],d6[3],d6[4],d6[5],d6[6]
+);
+SevenSegDecoder second(
+  dis5, numorchar,
+  d5[0],d5[1],d5[2],d5[3],d5[4],d5[5],d5[6]
+);
+SevenSegDecoder third(
+  dis4, numorchar,
+  d4[0],d4[1],d4[2],d4[3],d4[4],d4[5],d4[6]
+);
+SevenSegDecoder fourth(
   dis3, numorchar,
   d3[0],d3[1],d3[2],d3[3],d3[4],d3[5],d3[6]
 );
-SevenSegDecoder second(
+SevenSegDecoder five(
   dis2, numorchar,
   d2[0],d2[1],d2[2],d2[3],d2[4],d2[5],d2[6]
 );
-SevenSegDecoder third(
+SevenSegDecoder six(
   dis1, numorchar,
   d1[0],d1[1],d1[2],d1[3],d1[4],d1[5],d1[6]
 );
-SevenSegDecoder fourth(
+SevenSegDecoder seven(
   dis0, numorchar,
   d0[0],d0[1],d0[2],d0[3],d0[4],d0[5],d0[6]
 );
@@ -122,19 +135,25 @@ begin
     if (mode == WATCH)
     begin
       numorchar = 0;
-      dis3 <= St_hour1;
-      dis2 <= St_hour0;
-      dis1 <= St_min1;
-      dis0 <= St_min0;
+      dis6 <= St_hour1;
+      dis5 <= St_hour0;
+      dis4 <= St_min1;
+      dis3 <= St_min0;
+      dis2 <= 0;
+      dis1 <= 0;
+      dis0 <= 0;
       //TODO after this, give input to clock
     end
     if (mode == ALARM)
     begin
       numorchar = 0;
-      dis3 <= St_hour1;
-      dis2 <= St_hour0;
-      dis1 <= St_min1;
-      dis0 <= St_min0;
+      dis6 <= St_hour1;
+      dis5 <= St_hour0;
+      dis4 <= St_min1;
+      dis3 <= St_min0;
+      dis2 <= 0;
+      dis1 <= 0;
+      dis0 <= 0;
 
       Alm_hour1 <= St_hour1; 
       Alm_hour0 <= St_hour0; 
@@ -144,12 +163,18 @@ begin
     if (mode == DAY)
     begin
       numorchar = 1;
-      dis3 <= Sd_c3;
-      dis2 <= Sd_c2;
-      dis1 <= Sd_c1;
-      dis0 <= Sd_c0;
+      dis6 <= Sd_c3;
+      dis5 <= Sd_c2;
+      dis4 <= Sd_c1;
+      dis3 <= Sd_c0;
+      dis2 <= 0;
+      dis1 <= 0;
+      dis0 <= 0;
 
       day <= Sd_day;
+    end
+    else
+    begin
     end
   end
 
@@ -158,10 +183,13 @@ begin
   else if (mode == WATCH)
   begin
     numorchar = 0;
-    dis3 <= W_hour1;
-    dis2 <= W_hour0;
-    dis1 <= W_min1;
-    dis0 <= W_min0;
+    dis6 <= W_hour1;
+    dis5 <= W_hour0;
+    dis4 <= W_min1;
+    dis3 <= W_min0;
+    dis2 <= W_sec1;
+    dis1 <= W_sec0;
+    //TODO add am/pm
 
     Alm_hour1 <= W_hour1;
     Alm_hour0 <= W_hour0; 
@@ -173,10 +201,13 @@ begin
   else if (mode == STOPWATCH)
   begin
     numorchar = 0;
+    dis6 <= 0;
+    dis5 <= 0;
+    dis4 <= 3'b000;
     dis3 <= 3'b000;
     dis2 <= 3'b000;
     dis1 <= 3'b000;
-    dis0 <= 3'b000;
+    dis0 <= 0;
 
     Alm_hour1 <= W_hour1;
     Alm_hour0 <= W_hour0;
@@ -188,19 +219,29 @@ begin
   else if (mode == ALARM) 
   begin
     numorchar = 0;
-    dis3 <= Alm_hour1_d;
-    dis2 <= Alm_hour0_d;
-    dis1 <= Alm_min1_d;
-    dis0 <= Alm_min0_d;
+    dis6 <= Alm_hour1_d;
+    dis5 <= Alm_hour0_d;
+    dis4 <= Alm_min1_d;
+    dis3 <= Alm_min0_d;
+    dis2 <= 0;
+    dis1 <= 0;
+    dis0 <= 0;
   end
 
   else if (mode == DAY)
   begin
     numorchar = 1;
-    dis3 <= Day_3;
-    dis2 <= Day_2;
-    dis1 <= Day_1;
-    dis0 <= Day_0;
+    dis6 <= Day_3;
+    dis5 <= Day_2;
+    dis4 <= Day_1;
+    dis3 <= Day_0;
+    dis2 <= 0;
+    dis1 <= 0;
+    dis0 <= 0;
+  end
+
+  else
+  begin
   end
 
 end
