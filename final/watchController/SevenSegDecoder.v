@@ -36,7 +36,7 @@ begin
     D = 1;
     E = 1;
     F = 0;
-    G = 0;
+    G = 1;
   end
   else if  (number == 4'b0011)
   begin
@@ -46,7 +46,7 @@ begin
     D = 1;
     E = 0;
     F = 0;
-    G = 0;
+    G = 1;
   end
   else if  (number == 4'b0100)
   begin
@@ -81,7 +81,7 @@ begin
   else if  (number == 4'b0111)
   begin
     A = 1;
-    B = 0;
+    B = 1;
     C = 1;
     D = 0;
     E = 0;
@@ -106,7 +106,7 @@ begin
     D = 1;
     E = 0;
     F = 1;
-    G = 1;
+    G = 0;
   end
 end 
 endmodule
