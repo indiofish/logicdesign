@@ -19,7 +19,8 @@ module WatchCtrl (
 //TODO constants for mode
 parameter WATCH = 3'b000,
   STOPWATCH = 3'b001,
-  ALARM = 3'b010
+  ALARM = 3'b010,
+  DAY = 3'b011
   ;
 
 //For display
@@ -33,6 +34,8 @@ wire [3:0] W_hour1, W_hour0, W_min1, W_min0;
 reg [3:0] Sw_min, Sw_sec1, Sw_sec0, Sw_milSec;
 //internal value of Alarm
 reg [3:0] Alm_hour1, Alm_hour0, Alm_min1, Alm_min0;
+//ouput value of Alarm
+wire [3:0] Alm_hour1_d, Alm_hour0_d, Alm_min1_d, Alm_min0_d;
 //internal value of Day
 reg [3:0] Day_3, Day_2,Day_1,Day_0;
 //internal value for setbutton
@@ -52,8 +55,10 @@ SetTime timeset(
 //ALarm module should always run
 AlarmModule alm(
   alarmBeep,
-  //internal var
   //displays saved time
+  Alm_hour1_d, Alm_hour0_d, Alm_min1_d, Alm_min0_d,
+  
+  //internal var
   Alm_hour1, Alm_hour0, Alm_min1, Alm_min0,
   setValue,resetTime,clk
 );
@@ -94,7 +99,7 @@ begin
       dis2 <= St_hour0;
       dis1 <= St_min1;
       dis0 <= St_min0;
-      //after this, give input to clock
+      //TODO after this, give input to clock
     end
     if (mode == ALARM)
     begin
@@ -102,10 +107,15 @@ begin
       dis2 <= St_hour0;
       dis1 <= St_min1;
       dis0 <= St_min0;
+
       Alm_hour1 <= St_hour1; 
       Alm_hour0 <= St_hour0; 
       Alm_min1 <=St_min1; 
       Alm_min0 <= St_min0;
+    end
+    if (mode == DAY)
+    begin
+
     end
   end
   
@@ -142,10 +152,10 @@ begin
   //FIXME displays saved time
   else if (mode == ALARM) 
   begin
-      dis3 <= W_hour1;
-      dis2 <= W_hour0;
-      dis1 <= W_min1;
-      dis0 <= W_min0;
+      dis3 <= Alm_hour1_d;
+      dis2 <= Alm_hour0_d;
+      dis1 <= Alm_min1_d;
+      dis0 <= Alm_min0_d;
   end
 end
 //ENDOFBEHAVIOR
