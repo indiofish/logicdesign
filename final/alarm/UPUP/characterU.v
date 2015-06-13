@@ -1,4 +1,4 @@
-module SecondUP(
+module characterU(
     output A, B, C, D, E, F, G,
 input clk
 
@@ -16,11 +16,11 @@ if(current==display)
 begin
   A=1;
   B=1;
-  C=0;
+  C=1;
   D=0;
   E=1;
-  F=1;
-  G=1;
+  F=0;
+  G=0;
 next=none;
 end
 else

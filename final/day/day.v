@@ -1,16 +1,105 @@
-`include "FirstLetter.v"
-`include "SecondLetter.v"
-`include "ThirdLetter.v"
-`include "FourthLetter.v"
 module day(
-  input clk,
-  output [27:0]seg);
+  output [3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter,
+  input clk);
+reg [3:0]FirstLetter,SecondLetter,ThirdLetter,FourthLetter;
 
-reg [27:0]seg;
+parameter clkcount=1'd2;
+reg [2:0]current, next;
 
-FirstLetter first(seg[0], seg[1], seg[2], seg[3], seg[4],seg[5], seg[6], clk);
-SecondLetter second(seg[7], seg[8], seg[9], seg[10],seg[11],seg[12],seg[13],clk);
-ThirdLetter third(seg[14],seg[15],seg[16],seg[17], seg[18], seg[19], seg[20],clk);
-FourthLetter fourth(seg[21],seg[22], seg[23], seg[24], seg[25], seg[26],seg[27],clk);
+parameter mon=3'b000,
+  tue=3'b001,
+  wed=3'b010,
+  thu=3'b011,
+  fri=3'b100,
+  sat=3'b101,
+  sun=3'b110,
+  C_SPACE=4'b0000,
+  C_A=4'b0001,
+  C_D=4'b0010,
+  C_E=4'b0011,
+  C_F=4'b0100,
+  C_H=4'b0101,
+  C_I=4'b0110,
+  C_N=4'b0111,
+  C_O=4'b1000,
+  C_P=4'b1001,
+  C_R=4'b1010,
+  C_S=4'b1011,
+  C_T=4'b1100,
+  C_U=4'b1101;
+always @(posedge clkcount)
+begin
+  if(current==mon)
+  begin
+  FirstLetter=C_N;
+ SecondLetter=C_N;
+ThirdLetter=C_O;
+FourthLetter=C_N;
+next=current+1;
+end
+else if(current==tue)
+begin
+  FirstLetter=C_T;
+  SecondLetter=C_U;        
+  ThirdLetter=C_E;
+  FourthLetter=C_SPACE;
+  next=current+1;
+end
+else if(current==wed)
+begin
+  FirstLetter=C_U;        
+  SecondLetter=C_U;        
+  ThirdLetter=C_E;        
+  FourthLetter=C_D;        
+  next=current+1;
+end
+else if(current==thu)
+begin
+  FirstLetter=C_T;        
+  SecondLetter=C_H;        
+  ThirdLetter=C_U;        
+  FourthLetter=C_SPACE;        
+  next=current+1;
+end
+else if(current==fri)
+begin
+  FirstLetter=C_F;        
+  SecondLetter=C_R;
+  ThirdLetter=C_I;
+  FourthLetter=C_SPACE;
+  next=current+1;
+end
+else if(current==sat)
+begin
+  FirstLetter=C_S;
+  SecondLetter=C_A;
+  ThirdLetter=C_T;
+  FourthLetter=C_SPACE;
+  next=current+1;
+end
+else 
+begin 
+FirstLetter=C_S;
+SecondLetter=C_U;
+ThirdLetter=C_N;
+FourthLetter=C_SPACE;
+next=mon;
+end
+end
+always @(posedge clk)
+begin 
+begin
+if(clkcount==0)
+begin
+  clkcount<=1'd2;
+  current<=next;
+end
+else
+begin
+  clkcount-=1;
+current<=current;
+end
+end
+end
 
 endmodule

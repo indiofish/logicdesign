@@ -1,4 +1,4 @@
-module SecondUP(
+module characterP(
     output A, B, C, D, E, F, G,
 input clk
 
