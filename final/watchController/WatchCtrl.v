@@ -3,35 +3,116 @@
 `include "./SevenSegDecoder.v"
 `include "./Watch.v"
 `include "./SetTime.v"
+//TODO append modules
 
 module WatchCtrl (
-  input modeAlarm, modeClock, modeStopWatch, //selection of output mode
-  input resetTime, setValue, upTime, nextDigit, //change time value for alarm and watch
-  input clk, stop,
+  input[3:0] mode,
+  input resetTime, setValue, upTime, nextd,
+  input clk, start_resume, stop,
+  
+  //output to sevensegdecoder
+  output[6:0] d3, d2, d1, d0, 
 
-  output[6:0] digit3, digit2, digit1, digit0, //SevenSegDecoder
   output alarmBeep
 );
 
-wire [3:0] d3, d2, d1, d0;
-wire [3:0] hour1, hour0, min1, min0; //for SetTime
-wire [3:0] disH1, disH0, disM1, disM0;
+//VARIABLE DECLARTION
+
+//For display
+reg [3:0] dis3, dis2, dis1, dis0; 
+
+//internal value of SetTime
+wire [3:0] St_hour1, St_hour0, St_min1, St_min0;
+//internal value of Watch
+wire [3:0] W_hour1, W_hour0, W_min1, W_min0;
+//internal value of stopwatch
+reg [3:0] Sw_min, Sw_sec1, Sw_sec0, Sw_milSec;
+//internal value of Alarm
+reg [3:0] Alm_hour1, Alm_hour0, Alm_min1, Alm_min0;
+//internal value of Day
+reg [3:0] Day_3, Day_2,Day_1,Day_0;
+
+//endof VARIABLE DECLARTIONS
+
+//MODOLE DECLATIONS
+
+//input
+SetTime timeset(
+  St_hour1,St_hour0,St_min1,St_min0,
+  setValue,resetTime,nextd,upTime
+);
+
+//internal module
+AlarmModule alm(
+  alarmBeep,
+  //internal var
+  Alm_hour1, Alm_hour0, Alm_min1, Alm_min0,
+  setValue,resetTime,clk
+);
+StopWatch stopwatch();
+
+Watch watch(
+  W_hour1, W_hour0, W_min1, W_min0,
+  start_resume,resetTime,stop,clk,setValue
+);
 
 
-//INPUT
-SetTime timeset(hour1,hour0,min1,min0,setValue,resetTime,nextDigit,upTime);
+//display
+SevenSegDecoder first(
+  dis3,d0[0],d0[1],d0[2],d0[3],d0[4],d0[5],d0[6]
+);
+SevenSegDecoder second(
+  dis2,d1[0],d1[1],d1[2],d1[3],d1[4],d1[5],d1[6]
+);
+SevenSegDecoder third(
+  dis1,d2[0],d2[1],d2[2],d2[3],d2[4],d2[5],d2[6]
+);
+SevenSegDecoder fourth(
+  dis0,d3[0],d3[1],d3[2],d3[3],d3[4],d3[5],d3[6]
+);
 
-//INTERNAL MODULE
-AlarmModule beep(alarmBeep,hour1,hour0,min1,min0,setValue,resetTime,clk);
-//StopWatch stopwatch();
-//Watch watch();
+//end of modole declations
 
+//BEHAVIOR
+always @(posedge clk)
+begin
+  //setValue overrides display, changing curr mode's value
+  if  (setValue == 1)
+  begin
+    //Watch
+    if (mode == 3'b000)
+    begin
+      dis3 <= St_hour1;
+      dis2 <= St_hour0;
+      dis1 <= St_min1;
+      dis0 <= St_min0;
+    end
+    //stopwatch
+    if (mode == 3'b001)
+    begin
+      //dis3 <= St_hour1;
+      //dis2 <= St_hour0;
+      //dis1 <= St_min1;
+      //dis0 <= St_min0;
+    end
+  end
+  
+  //base mod: watch
+  else if (mode == 3'b000)
+  begin
+      dis3 <= W_hour1;
+      dis2 <= W_hour0;
+      dis1 <= W_min1;
+      dis0 <= W_min0;
+  end
 
-//OUTPUT
-SevenSegDecoder first(disM0,digit0[0],digit0[1],digit0[2],digit0[3],digit0[4],digit0[5],digit0[6]);
-SevenSegDecoder second(disM1,digit1[0],digit1[1],digit1[2],digit1[3],digit1[4],digit1[5],digit1[6]);
-SevenSegDecoder third(disH0,digit2[0],digit2[1],digit2[2],digit2[3],digit2[4],digit2[5],digit2[6]);
-SevenSegDecoder fourth(disH0,digit3[0],digit3[1],digit3[2],digit3[3],digit3[4],digit3[5],digit3[6]);
+  //stopwatch
+  else if (mode == 3'b001) 
+  begin
+  end
+  
+end
+//ENDOFBEHAVIOR
 
   
 endmodule

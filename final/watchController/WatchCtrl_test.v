@@ -1,15 +1,17 @@
 `include "./WatchCtrl.v"
 
 module WatchCtrl_test;
-   reg modeAlarm, modeClock, modeStopWatch; //selection of output mode
-   reg resetTime, setValue, upTime, nextDigit; //change time value for alarm and watch
-  reg clk, stop;
 
-  wire[6:0] digit3, digit2, digit1, digit0; //SevenSegDecoder
-  wire alarmBeep;
-  
+reg [3:0]mode; //selection of output mode
+
+reg resetTime, setValue, upTime, nextDigit; //change time value for alarm and watch
+reg clk, stop;
+
+wire[6:0] digit3, digit2, digit1, digit0; //SevenSegDecoder
+wire alarmBeep;
+
 WatchCtrl uut(
-  modeAlarm, modeClock, modeStopWatch,resetTime, setValue, upTime, nextDigit, clk, stop, digit3, digit2, digit1, digit0, alarmBeep
+  mode,resetTime, setValue, upTime, nextDigit, clk, stop, digit3, digit2, digit1, digit0, alarmBeep
 );
 
 initial begin
