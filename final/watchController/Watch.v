@@ -1,7 +1,7 @@
-`include "./Mod6Counter.v"
-`include "./Mod10Counter.v"
-`include "./Mod2Counter.v"//hour 1 digit
-`include "./Mod13Counter.v" //hour 0 digit
+`include "./Counter/Mod6Counter.v"
+`include "./Counter/Mod10Counter.v"
+`include "./Counter/Mod2Counter.v"//hour 1 digit
+`include "./Counter/Mod13Counter.v" //hour 0 digit
 
 //able to set time 
 module Watch (

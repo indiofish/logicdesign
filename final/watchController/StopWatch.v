@@ -1,9 +1,5 @@
-`ifndef Mod6Counter
-`include "./Mod6Counter.v"
-`endif
-`ifndef Mod10Counter
-`include "./Mod10Counter.v"
-`endif
+`include "./Counter/Mod6Counter.v"
+`include "./Counter/Mod10Counter.v"
 
 
 
