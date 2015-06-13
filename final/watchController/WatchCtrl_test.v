@@ -38,8 +38,8 @@ initial begin
     resetTime <= 0;
     start_resume <= 1;
   end
-  #10 mode = 3'b010;
-  #10 setValue = 1;
+  #10 mode = 3'b011;
+  #100 setValue = 1;
     #10 upTime = 1;
     #10 upTime = 0;
     #10 upTime = 1;
@@ -48,14 +48,10 @@ initial begin
     #10 upTime = 0;
     #10 upTime = 1;
     #10 upTime = 0;
-    #10 nextDigit = 1;
-    #10 nextDigit = 0;
     #10 upTime = 1;
     #10 upTime = 0;
     #10 upTime = 1;
     #10 upTime = 0;
-    #10 nextDigit = 1;
-    #10 nextDigit = 0;
     #10 upTime = 1;
     #10 upTime = 0;
   #10 setValue = 0;

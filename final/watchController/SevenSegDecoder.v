@@ -26,107 +26,250 @@ C_U = 4'b1101;
 //fix this to only combinational logic?
 always @(value or mode)
 begin
-  if  (value == 4'b0000 && mode == NUMBER)
+  if (mode == NUMBER)
   begin
-    A = 1;
-    B = 1;
-    C = 1;
-    D = 1;
-    E = 1;
-    F = 1;
-    G = 0;
-  end
-  else if  (value == 4'b0001 && mode == NUMBER)
-  begin
-    A = 0;
-    B = 1;
-    C = 1;
-    D = 0;
-    E = 0;
-    F = 0;
-    G = 0;
-  end
-  else if  (value == 4'b0010 && mode == NUMBER)
-  begin
-    A = 1;
-    B = 1;
-    C = 0;
-    D = 1;
-    E = 1;
-    F = 0;
-    G = 1;
-  end
-  else if  (value == 4'b0011 && mode == NUMBER)
-  begin
-    A = 1;
-    B = 1;
-    C = 1;
-    D = 1;
-    E = 0;
-    F = 0;
-    G = 1;
-  end
-  else if  (value == 4'b0100 && mode == NUMBER)
-  begin
-    A = 0;
-    B = 1;
-    C = 1;
-    D = 0;
-    E = 0;
-    F = 1;
-    G = 1;
-  end
-  else if  (value == 4'b0101 && mode == NUMBER)
-  begin
-    A = 1;
-    B = 0;
-    C = 1;
-    D = 1;
-    E = 0;
-    F = 1;
-    G = 1;
-  end
-  else if  (value == 4'b0110 && mode == NUMBER)
-  begin
-    A = 1;
-    B = 0;
-    C = 1;
-    D = 1;
-    E = 1;
-    F = 1;
-    G = 1;
-  end
-  else if  (value == 4'b0111 && mode == NUMBER)
-  begin
-    A = 1;
-    B = 1;
-    C = 1;
-    D = 0;
-    E = 0;
-    F = 1;
-    G = 0;
-  end
-  else if  (value == 4'b1000 && mode == NUMBER)
-  begin
-    A = 1;
-    B = 1;
-    C = 1;
-    D = 1;
-    E = 1;
-    F = 1;
-    G = 1;
-  end
-  else if  (value == 4'b1001 && mode == NUMBER)
-  begin
-    A = 1;
-    B = 1;
-    C = 1;
-    D = 1;
-    E = 0;
-    F = 1;
-    G = 1;
+    if  (value == 4'b0000)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 1;
+      E = 1;
+      F = 1;
+      G = 0;
+    end
+    else if  (value == 4'b0001)
+    begin
+      A = 0;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 0;
+      F = 0;
+      G = 0;
+    end
+    else if  (value == 4'b0010)
+    begin
+      A = 1;
+      B = 1;
+      C = 0;
+      D = 1;
+      E = 1;
+      F = 0;
+      G = 1;
+    end
+    else if  (value == 4'b0011)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 1;
+      E = 0;
+      F = 0;
+      G = 1;
+    end
+    else if  (value == 4'b0100)
+    begin
+      A = 0;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 0;
+      F = 1;
+      G = 1;
+    end
+    else if  (value == 4'b0101)
+    begin
+      A = 1;
+      B = 0;
+      C = 1;
+      D = 1;
+      E = 0;
+      F = 1;
+      G = 1;
+    end
+    else if  (value == 4'b0110)
+    begin
+      A = 1;
+      B = 0;
+      C = 1;
+      D = 1;
+      E = 1;
+      F = 1;
+      G = 1;
+    end
+    else if  (value == 4'b0111)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 0;
+      F = 1;
+      G = 0;
+    end
+    else if  (value == 4'b1000)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 1;
+      E = 1;
+      F = 1;
+      G = 1;
+    end
+    else if  (value == 4'b1001)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 1;
+      E = 0;
+      F = 1;
+      G = 1;
+    end
   end
 
-  if  (value == )
-end 
+  else if (mode == ALPHABET)
+    if(value == C_SPACE)
+    begin
+      A = 0;
+      B = 0;
+      C = 0;
+      D = 0;
+      E = 0;
+      F = 0;
+      G = 0;
+    end 
+    if(value == C_A)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 1;
+      F = 1;
+      G = 1;
+    end 
+    if(value == C_D)
+    begin
+      A = 0;
+      B = 1;
+      C = 1;
+      D = 1;
+      E = 1;
+      F = 0;
+      G = 1;
+    end 
+    if(value == C_E)
+    begin
+      A = 1;
+      B = 0;
+      C = 0;
+      D = 1;
+      E = 1;
+      F = 1;
+      G = 1;
+    end 
+    if(value == C_F)
+    begin
+      A = 1;
+      B = 0;
+      C = 0;
+      D = 0;
+      E = 1;
+      F = 1;
+      G = 1;
+    end 
+    if(value == C_H)
+    begin
+      A = 0;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 1;
+      F = 1;
+      G = 1;
+    end 
+    if(value == C_I)
+    begin
+      A = 0;
+      B = 0;
+      C = 0;
+      D = 0;
+      E = 1;
+      F = 1;
+      G = 0;
+    end 
+    if(value == C_N)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 1;
+      F = 1;
+      G = 0;
+    end 
+    if(value == C_O)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 1;
+      E = 1;
+      F = 1;
+      G = 0;
+    end 
+    if(value == C_P)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 1;
+      F = 1;
+      G = 0;
+    end 
+    if(value == C_R)
+    begin
+      A = 1;
+      B = 0;
+      C = 0;
+      D = 0;
+      E = 1;
+      F = 1;
+      G = 0;
+    end 
+    if(value == C_S)
+    begin
+      A = 1;
+      B = 0;
+      C = 1;
+      D = 1;
+      E = 0;
+      F = 1;
+      G = 1;
+    end 
+    if(value == C_T)
+    begin
+      A = 1;
+      B = 1;
+      C = 1;
+      D = 0;
+      E = 0;
+      F = 0;
+      G = 0;
+    end 
+    if(value == C_U)
+    begin
+      A = 0;
+      B = 1;
+      C = 1;
+      D = 1;
+      E = 1;
+      F = 1;
+      G = 0;
+    end 
+  end 
 endmodule
