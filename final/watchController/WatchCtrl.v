@@ -35,7 +35,7 @@ wire[2:0] Sd_day;
 wire [3:0] W_hour1, W_hour0, W_min1, W_min0, W_sec1, W_sec0;
 wire daypass;
 //internal value of stopwatch
-reg [3:0] Sw_min, Sw_sec1, Sw_sec0, Sw_milSec;
+wire [3:0] Sw_min, Sw_sec1, Sw_sec0, Sw_milSec;
 //internal value of Alarm
 reg [3:0] Alm_hour1, Alm_hour0, Alm_min1, Alm_min0;
 //ouput value of Alarm
@@ -81,8 +81,11 @@ AlarmModule alm(
   Alm_hour1, Alm_hour0, Alm_min1, Alm_min0,
   setValue,resetTime,clk
 );
-//FIXME
-//StopWatch stopwatch();
+
+StopWatch stopwatch(
+  Sw_min, Sw_sec1, Sw_sec0, Sw_milSec,
+  start_resume,resetTime,stop,clk
+);
 
 Watch watch(
   W_hour1, W_hour0, W_min1, W_min0, W_sec1, W_sec0,
@@ -203,10 +206,10 @@ begin
     numorchar = 0;
     dis6 <= 0;
     dis5 <= 0;
-    dis4 <= 3'b000;
-    dis3 <= 3'b000;
-    dis2 <= 3'b000;
-    dis1 <= 3'b000;
+    dis4 <= Sw_min;
+    dis3 <= Sw_sec1;
+    dis2 <= Sw_sec0;
+    dis1 <= Sw_milSec;
     dis0 <= 0;
 
     Alm_hour1 <= W_hour1;
