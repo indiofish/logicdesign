@@ -1,3 +1,6 @@
+###TODO###
+* add time set functionality
+* devide 1mhz signal to 1 sec.
 ##Modules
   * stopwatch module 
     as is.
