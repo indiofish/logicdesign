@@ -1,4 +1,3 @@
-//How should we return output?
 `include "Mod10Counter.v"
 `include "Mod6Counter.v"
 
@@ -19,8 +18,8 @@ begin
   begin
     if  (reset == 1)
     begin
-   //   currNum <= 0;
-//      changeTime <= 0;
+      //   currNum <= 0;
+      //      changeTime <= 0;
       h1 <= 0;
       h0 <= 0;
       m1 <= 0;

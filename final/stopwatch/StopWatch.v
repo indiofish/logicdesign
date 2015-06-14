@@ -1,5 +1,11 @@
-`include "./Mod10Counter.v"
+`ifndef Mod6Counter
 `include "./Mod6Counter.v"
+`endif
+`ifndef Mod10Counter
+`include "./Mod10Counter.v"
+`endif
+
+
 
 module StopWatch(
   output[3:0] min0, sec1, sec0, milSec0,
