@@ -11,15 +11,24 @@
 
 ##extra implementation
 
-  * 알람이 켜져있을 때, UPUP 표시/morse부호
-  * NY, TOKYO 같은 버튼을 누르면 세계시간 표시
+  * 알람이 켜져있을 때, UPUP 표시*we can, but will we?*
   * 7 segment 추가
-    * 요일(숫자로)
-    * A, P 로 AM, PM 표시
-  * 알람 snooze 기능
-  * 시각 지정 알람 + 시간 지정 알람
-  * 알람을 끄는 데 추가노력
-  * 스네이크 게임????????????
-  * 애인의 생일을 기억하는 기능
+    * 요일(숫자로) *done*
+    * A, P 로 AM, PM 표시 *done*
+  * 알람 snooze 기능 *seems possible*
 
-
+## ALPHABETICAL MAPPINGS
+C_SPACE = 4'b0000,
+C_A = 4'b0001,
+C_D = 4'b0010,
+C_E = 4'b0011,
+C_F = 4'b0100,
+C_H = 4'b0101,
+C_I = 4'b0110,
+C_N = 4'b0111,
+C_O = 4'b1000,
+C_P = 4'b1001,
+C_R = 4'b1010,
+C_S = 4'b1011,
+C_T = 4'b1100,
+C_U = 4'b1101;
