@@ -10,9 +10,9 @@ reg[1:0] currNum;
 //reg changeTime;
 wire[3:0] hour0, min1, min0;
 
-Mod10Counter hour0mod (hour0,,start,reset,,up);
-Mod6Counter min1mod(min1,,start,reset,,up);
-Mod10Counter min0mod(min0,,start,reset,,up);
+Mod10Counter hour0mod (hour0,,,start,reset,,up,);
+Mod6Counter min1mod(min1,,,start,reset,,up,);
+Mod10Counter min0mod(min0,,,start,reset,,up,);
 always @(posedge up or posedge reset)
 begin
   begin

@@ -3,7 +3,8 @@
 module Mod10Counter(
   output reg[3:0] number,
   output reg cout,
-  input start_resume,reset, stop, clk
+  input[3:0] init,
+  input start_resume,reset, stop, clk, set
 );
 
 reg [3:0] current, next;
@@ -66,7 +67,9 @@ end
 always @(posedge clk)
 begin
   begin
-    if(reset==1)
+    if (set == 1)
+      current <= init;
+    else if(reset==1)
       current <= zero;
     else
       current <= next;

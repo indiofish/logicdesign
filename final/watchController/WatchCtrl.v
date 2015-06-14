@@ -33,6 +33,7 @@ wire [3:0] Sd_c3, Sd_c2, Sd_c1, Sd_c0;
 wire[2:0] Sd_day;
 //internal value of Watch
 wire [3:0] W_hour1, W_hour0, W_min1, W_min0, W_sec1, W_sec0;
+input[3:0] in_hr1, in_hr0, in_min1, in_min0, in_sec1, in_sec0;
 wire daypass;
 //internal value of stopwatch
 wire [3:0] Sw_min, Sw_sec1, Sw_sec0, Sw_milSec;
@@ -90,6 +91,7 @@ StopWatch stopwatch(
 Watch watch(
   W_hour1, W_hour0, W_min1, W_min0, W_sec1, W_sec0,
   daypass,
+ in_hr1, in_hr0, in_min1, in_min0, in_sec1, in_sec0,
   start_resume,resetTime,stop,clk,setValue
 );
 
